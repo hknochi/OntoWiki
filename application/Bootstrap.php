@@ -164,6 +164,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // set path variables
         $rewriteBase = substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], BOOTSTRAP_FILE));
         $protocol    = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') ? 'https' : 'http';
+        $protocol    = ($protocol == 'http' && isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https') ? 'https' : 'http' ;
 
         if (isset($_SERVER['SERVER_PORT'])
             && $_SERVER['SERVER_PORT'] != '80'
